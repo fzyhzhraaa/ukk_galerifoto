@@ -1,0 +1,33 @@
+@startuml galeri
+
+actor User
+actor Admin as AdminUser
+actor Visitor
+
+rectangle "Gallery Application" {
+    
+    User --> (Register Account)
+    User --> (Login)
+    User --> (Logout)
+    User --> (Create Album)
+    User --> (Upload Photo)
+
+    Visitor --> (View Albums)
+    Visitor --> (View Photos)
+
+    User --> (Like Photo)
+    User --> (Add Comment)
+
+    AdminUser --> (Delete Any Comment)
+    AdminUser --> (Delete Any Photo)
+    
+    (Register Account) --> (Login) : Redirect on success
+    (Login) --> (View Albums) : After login
+    (View Albums) --> (View Photos) : Select album
+    (View Photos) --> (Like Photo) : Like/unlike photo
+    (View Photos) --> (Add Comment) : Add new comment
+    (Delete Any Comment) --> (View Photos) : Available for Admin
+    (Delete Any Photo) --> (View Photos) : Available for Admin
+}
+
+@enduml
